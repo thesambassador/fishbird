@@ -184,7 +184,7 @@ MonoBehaviour:
   initialImpulse: {x: 0, y: 0}
   maxSpeed: 30
   aimerPivotTransform: {fileID: 4290000138371310}
-  projectileSpawnPoint: {fileID: 0}
+  projectileSpawnPoint: {fileID: 4832485853142368}
   aimDirection: {x: 0, y: 0}
 --- !u!114 &114286396890747056
 MonoBehaviour:
@@ -238,6 +238,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   projectilePrefab: {fileID: 114990654661581652, guid: a32e8475f4f77cc4fabf3e0f70fa9494,
     type: 2}
+  projectileOffset: 2
 --- !u!114 &114499129387320568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bbda82b572a534ab4fe4fd5e571260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
+  playerId: 0
   swimDashImpulse: 10
   maxSpeed: 30
   swimMovementForceCurve:
@@ -280,7 +281,10 @@ MonoBehaviour:
   maxSwimSpeed: 30
   waterDragNoInput: 0.5
   waterDragInput: 0.1
-  ProjectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 114407359638214884, guid: 504a3a8398250ed4d95a044422a43f0f,
+    type: 2}
+  projectileOffset: 1
+  projectileFireRate: 10
 --- !u!212 &212071671931428098
 SpriteRenderer:
   m_ObjectHideFlags: 1

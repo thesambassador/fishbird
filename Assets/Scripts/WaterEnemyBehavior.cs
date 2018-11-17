@@ -13,6 +13,7 @@ public class WaterEnemyBehavior : MonoBehaviour {
 
 	public Transform targetTransform;
 
+	public float killVelocity;
 	public float strokeCooldown;
 	public Animator animator;
 	public Rigidbody2D rb;
@@ -87,7 +88,12 @@ public class WaterEnemyBehavior : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision) {
-		print("ahhhh");
+		if(collision.gameObject.tag == "Ground") {
+			//print(collision.relativeVelocity.magnitude);
+			if(collision.relativeVelocity.magnitude > killVelocity) {
+				Destroy(this.gameObject);
+			}
+		}
 	}
 
 	void SwimImpulse() {
