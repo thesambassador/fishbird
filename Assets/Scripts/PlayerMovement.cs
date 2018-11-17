@@ -17,26 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	public PlayerMovementState state;
 
-	public bool flapEnabled;
-	public float flapImpulse;
-
-	public float liftForce;
-
 	public Vector2 initialImpulse;
 	public float maxSpeed;
-	public float airMovementSpeed;
-
-	public AnimationCurve flapImpulseCurve;
-
-	public AnimationCurve swimMovementForceCurve;
-	public float maxSwimForce = 30;
-	public float maxSwimSpeed = 30;
-
-	public float swimDashImpulse;
-
-	public float maxAirDrag = .3f;
-	public float waterDragNoInput = .5f;
-	public float waterDragInput = .1f;
 
 	void Awake() {
 		player = ReInput.players.GetPlayer(playerId);
@@ -77,70 +59,24 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void UpdateFly() {
-		bool moveAbilityDown = player.GetButtonDown("Move Ability");
-		if (moveAbilityDown && flapEnabled) {
-			Flap();
-		}
+
 	}
 
 	void UpdateSwim() {
-		bool moveAbilityDown = player.GetButtonDown("Move Ability");
-		if (moveAbilityDown) {
-			rb.AddCappedForce(rb.velocity.normalized * swimDashImpulse, maxSpeed, ForceMode2D.Impulse);
-		}
+
 	}
 
 	void FixedUpdateFly() {
-		float pitch = player.GetAxis("Pitch");
 
-		Vector2 pitchForce = Vector2.Perpendicular(rb.velocity) * pitch * liftForce;
-
-		rb.AddCappedForce(pitchForce, maxSpeed);
-		if (pitchForce.magnitude > 0) {
-			rb.AddCappedForce(rb.velocity * 0.1f, maxSpeed);
-		}
-
-		float dot = Mathf.Abs(Vector2.Dot(rb.velocity.normalized, Vector2.down));
-		rb.drag = maxAirDrag * dot;
-
-		Debug.DrawLine(transform.position, transform.position + (Vector3)(pitchForce * 0.1f), Color.red);
 	}
 
 	void FixedUpdateSwim() {
-		Vector2 movement = player.GetAxis2D("Horizontal", "Vertical");
-		if (movement.magnitude > 1) movement.Normalize();
 
-		Vector2 targetSpeed = movement * maxSwimSpeed;
 
-		Vector2 curTargetDiff = targetSpeed - rb.velocity;
-
-		Debug.DrawLine(transform.position, transform.position + (Vector3)(curTargetDiff), Color.green);
-
-		//avoid divide by 0 i guess
-		float forceToUse = 0;
-		print(Vector2.Dot(targetSpeed, curTargetDiff));
-		if (targetSpeed.magnitude > 0 && Vector2.Dot(targetSpeed, curTargetDiff) >= 0) {
-			// if curTargetDiff.magnitude is 0, that means that we're moving at the target speed already
-			forceToUse = swimMovementForceCurve.Evaluate(curTargetDiff.magnitude / targetSpeed.magnitude) * maxSwimForce;
-		}
-	
-
-		if(movement.magnitude > 0) {
-			rb.drag = waterDragInput;
-		}
-		else {
-			rb.drag = waterDragNoInput;
-		}
-
-		Debug.DrawLine(transform.position, transform.position + (Vector3)(forceToUse * movement * 0.1f), Color.red);
-
-		rb.AddForce(forceToUse * curTargetDiff.normalized);
-		print("Current vel magnitude: " + rb.velocity.magnitude + "force used: " + forceToUse);
 	}
 
 	void Flap() {
-		float flapAmount = flapImpulse * flapImpulseCurve.Evaluate(Mathf.Max(0, rb.velocity.y) / maxSpeed);
-		rb.AddCappedForce(Vector2.up * flapAmount, maxSpeed, ForceMode2D.Impulse);
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
