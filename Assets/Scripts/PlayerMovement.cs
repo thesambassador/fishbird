@@ -19,11 +19,15 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Vector2 initialImpulse;
 	public float maxSpeed;
+	public Transform aimerPivotTransform;
+	public Transform projectileSpawnPoint;
+
+	public Vector2 aimDirection;
 
 	void Awake() {
 		player = ReInput.players.GetPlayer(playerId);
 		rb = GetComponent<Rigidbody2D>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 	}
 
 	void Start() {
@@ -42,8 +46,10 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
- 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+ 		spriteRenderer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		spriteRenderer.flipY = rb.velocity.x < 0;
+
+		aimerPivotTransform.right = aimDirection.normalized;
 	}
 
 	void FixedUpdate() {

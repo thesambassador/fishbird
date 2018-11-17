@@ -23,6 +23,12 @@ public class PlayerWaterControl : MonoBehaviour {
 	public float waterDragNoInput = .5f;
 	public float waterDragInput = .1f;
 
+	public Projectile projectilePrefab;
+	public float projectileOffset = 1;
+	public float projectileFireRate = 10;
+
+	private float _shotCooldown = 0;
+
 	void Awake() {
 		player = ReInput.players.GetPlayer(playerId);
 		rb = GetComponent<Rigidbody2D>();
@@ -59,7 +65,27 @@ public class PlayerWaterControl : MonoBehaviour {
 	}
 
 	void UpdateFly() {
+		Vector2 movement = player.GetAxis2D("AimHorizontal", "AimVertical");
+		if (movement.sqrMagnitude != 0) {
+			playerMovement.aimDirection = movement.normalized;
+		}
 
+		if (player.GetButton("SecondaryAbility")) {
+			if (_shotCooldown <= 0) {
+				Projectile shootyshoot = Instantiate(projectilePrefab);
+				shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
+				shootyshoot.direction = playerMovement.aimDirection;
+
+				shootyshoot.speed += Vector2.Dot(rb.velocity, shootyshoot.direction);
+				print(shootyshoot.speed);
+
+				shootyshoot.transform.right = playerMovement.aimDirection;
+
+				_shotCooldown = 1 / projectileFireRate;
+			}
+			
+		}
+		_shotCooldown -= Time.deltaTime;
 	}
 
 	void UpdateSwim() {

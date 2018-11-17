@@ -21,6 +21,9 @@ public class PlayerAirControl : MonoBehaviour {
 
 	public AnimationCurve flapImpulseCurve;
 
+	public Projectile projectilePrefab;
+	public float projectileOffset = 1.5f;
+
 	void Awake() {
 		player = ReInput.players.GetPlayer(playerId);
 		rb = GetComponent<Rigidbody2D>();
@@ -69,7 +72,21 @@ public class PlayerAirControl : MonoBehaviour {
 	}
 
 	void UpdateSwim() {
+		Vector2 movement = player.GetAxis2D("AimHorizontal", "AimVertical");
+		if (movement.sqrMagnitude != 0) {
+			playerMovement.aimDirection = movement.normalized;
+		}
 
+		if(player.GetButtonDown("SecondaryAbility")){
+			Projectile shootyshoot = Instantiate(projectilePrefab);
+			shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
+			shootyshoot.direction = playerMovement.aimDirection;
+
+			shootyshoot.speed += Vector2.Dot(rb.velocity, shootyshoot.direction);
+			print(shootyshoot.speed);
+
+			shootyshoot.transform.right = playerMovement.aimDirection;
+		}
 	}
 
 	void FixedUpdateFly() {
