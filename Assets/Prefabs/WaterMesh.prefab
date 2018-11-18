@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4992996520806180}
   - component: {fileID: 23056405141956994}
   - component: {fileID: 33845012881462726}
+  - component: {fileID: 210989343221046824}
   m_Layer: 0
   m_Name: WaterMesh
   m_TagString: Untagged
@@ -83,3 +84,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1639566081996044}
   m_Mesh: {fileID: 0}
+--- !u!210 &210989343221046824
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1639566081996044}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
