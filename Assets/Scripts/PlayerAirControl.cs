@@ -83,7 +83,6 @@ public class PlayerAirControl : MonoBehaviour {
 			shootyshoot.direction = playerMovement.aimDirection;
 
 			shootyshoot.speed += Vector2.Dot(rb.velocity, shootyshoot.direction);
-			print(shootyshoot.speed);
 
 			shootyshoot.transform.right = playerMovement.aimDirection;
 		}
