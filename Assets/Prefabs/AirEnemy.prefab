@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 58135565083878584}
   - component: {fileID: 114062863924688076}
   - component: {fileID: 114514737932595962}
+  - component: {fileID: 114666302445451738}
   m_Layer: 0
   m_Name: AirEnemy
   m_TagString: Untagged
@@ -98,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575318967876326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.07, y: 3.43, z: 0.0144380005}
+  m_LocalPosition: {x: -10.08, y: 9.62, z: 0.0144380005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4660493328665908}
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d99544dc4d5be4aabba2556f26e1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 3
   invulnTimeAfterHit: 0
   OnDamaged:
     m_PersistentCalls:
@@ -234,6 +235,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114666302445451738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575318967876326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85de2edfa52219d489c1e650412a486e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 212342831958795510}
+  animationTime: 0.5
 --- !u!114 &114859840154375968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,7 +295,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0e015ecd147972c41b1faf4690c53167, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.7870383, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

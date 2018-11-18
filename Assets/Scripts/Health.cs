@@ -49,6 +49,10 @@ public class Health : MonoBehaviour {
 				Kill();
 			}
 			_invulnTimer = invulnTimeAfterHit;
+
+			if(OnDamaged != null) {
+				OnDamaged.Invoke();
+			}
 		}
 	}
 
