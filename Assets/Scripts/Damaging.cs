@@ -5,6 +5,8 @@ using UnityEngine;
 public class Damaging : MonoBehaviour {
 
 	public float damageAmount;
+	[TagSelector]
+	public string damageTag;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +22,9 @@ public class Damaging : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		Health health = collision.gameObject.GetComponent<Health>();
 		if (health != null) {
-			health.Damage(damageAmount);
+			if (damageTag != null && collision.gameObject.tag == damageTag) {
+				health.Damage(damageAmount);
+			}
 		}
 	}
 
