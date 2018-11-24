@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour {
 	public float hp;
 	public float invulnTimeAfterHit = 0;
+	public GameObject killPrefab;
 
 	private float _invulnTimer;
 
@@ -59,6 +60,10 @@ public class Health : MonoBehaviour {
 	public void Kill() {
 		if (OnKilled != null) {
 			OnKilled.Invoke();
+		}
+
+		if(killPrefab != null) {
+			Instantiate(killPrefab, transform.position, transform.rotation);
 		}
 		Destroy(this.gameObject);
 	}

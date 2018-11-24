@@ -45,6 +45,10 @@ public class WaterEnemyBehavior : MonoBehaviour {
 	}
 
 	void ChaseState() {
+		if(targetTransform == null) {
+			state = EnemyState.Idle;
+			return;
+		}
 		
 		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
 			_pointAtPlayer = true;
@@ -83,6 +87,7 @@ public class WaterEnemyBehavior : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.tag == "Player") {
+			targetTransform = collision.gameObject.transform;
 			state = EnemyState.Chasing;
 		}
 	}

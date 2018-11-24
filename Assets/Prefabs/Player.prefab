@@ -71,6 +71,8 @@ GameObject:
   - component: {fileID: 114215457558895738}
   - component: {fileID: 114499129387320568}
   - component: {fileID: 114286396890747056}
+  - component: {fileID: 114627780272137176}
+  - component: {fileID: 114664448717105432}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -99,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683940139785172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: -3.01, z: 0}
+  m_LocalPosition: {x: 0, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648940280603034}
@@ -285,6 +287,41 @@ MonoBehaviour:
     type: 2}
   projectileOffset: 1
   projectileFireRate: 10
+--- !u!114 &114627780272137176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683940139785172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d99544dc4d5be4aabba2556f26e1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  invulnTimeAfterHit: 0
+  killPrefab: {fileID: 1605960496091580, guid: 8b3c066839c56004e9fa9e1c4249ba22, type: 2}
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnKilled:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &114664448717105432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683940139785172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a184a20ff9976cf42badbac3970ff546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212071671931428098
 SpriteRenderer:
   m_ObjectHideFlags: 1

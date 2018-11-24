@@ -15,14 +15,19 @@ public class Damaging : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		Health health = collision.gameObject.GetComponent<Health>();
 		if (health != null) {
-			if (damageTag != null && collision.gameObject.tag == damageTag) {
+			if (damageTag != null){
+				if (collision.gameObject.tag == damageTag) {
+					health.Damage(damageAmount);
+				}
+			}
+			else {
 				health.Damage(damageAmount);
 			}
 		}

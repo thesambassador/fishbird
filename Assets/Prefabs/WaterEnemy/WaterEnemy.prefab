@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 60204702828571916}
   - component: {fileID: 114807776823652534}
   - component: {fileID: 95032517325372892}
+  - component: {fileID: 114726749602651114}
   m_Layer: 0
   m_Name: WaterEnemy
   m_TagString: Untagged
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1495814925024230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.07, y: -5.919728, z: 0.0144380005}
+  m_LocalPosition: {x: 298.84, y: -49.97, z: 0.0144380005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4665903651747132}
@@ -212,6 +213,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114726749602651114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1495814925024230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519b567fdd9c28d48b3cfb70688dd814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  damageTag: Player
 --- !u!114 &114807776823652534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   targetTransform: {fileID: 0}
+  killVelocity: 10
   strokeCooldown: 1.5
   animator: {fileID: 95032517325372892}
   rb: {fileID: 50751996771610206}
