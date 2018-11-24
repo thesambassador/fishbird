@@ -63,9 +63,9 @@ public class Health : MonoBehaviour {
 		}
 
 		if(killPrefab != null) {
-			Instantiate(killPrefab, transform.position, transform.rotation);
+			ObjectPoolManager.GetObject(killPrefab, transform.position, transform.rotation);
 		}
-		Destroy(this.gameObject);
+		ObjectPoolManager.ReturnObject(this.gameObject);
 	}
 
 }

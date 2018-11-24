@@ -15,10 +15,14 @@ public class Projectile : MonoBehaviour {
 	public bool destroyOnCollision;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		StartCoroutine(ProjectileCoroutine());
 	}
-	
+
+	void OnDisable() {
+		StopAllCoroutines();
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -35,12 +39,12 @@ public class Projectile : MonoBehaviour {
 			time += Time.deltaTime;
 			yield return null;
 		}
-		Destroy(this.gameObject);
+		ObjectPoolManager.ReturnObject(this.gameObject);
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (destroyOnCollision) {
-			Destroy(this.gameObject);
+			ObjectPoolManager.ReturnObject(this.gameObject);
 		}
 	}
 }

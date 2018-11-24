@@ -6,7 +6,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
-	public PlayerMovement playerPrefab;
+	public GameObject playerPrefab;
 
 	public ProCamera2D cameraController;
 
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
 	public void RespawnPlayerAtLastCheckpoint() {
 		Vector3 spawnPos = _lastCheckpoint.transform.position;
 
-		PlayerMovement newPlayer = Instantiate(playerPrefab);
+		PlayerMovement newPlayer = ObjectPoolManager.GetObject(playerPrefab).GetComponent<PlayerMovement>();
 		newPlayer.transform.position = spawnPos;
 
 	}

@@ -23,7 +23,7 @@ public class PlayerWaterControl : MonoBehaviour {
 	public float waterDragNoInput = .5f;
 	public float waterDragInput = .1f;
 
-	public Projectile projectilePrefab;
+	public GameObject projectilePrefab;
 	public float projectileOffset = 1;
 	public float projectileFireRate = 10;
 
@@ -72,7 +72,7 @@ public class PlayerWaterControl : MonoBehaviour {
 
 		if (player.GetButton("SecondaryAbility")) {
 			if (_shotCooldown <= 0) {
-				Projectile shootyshoot = Instantiate(projectilePrefab);
+				Projectile shootyshoot = ObjectPoolManager.GetObject(projectilePrefab).GetComponent<Projectile>();
 				shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
 				shootyshoot.direction = playerMovement.aimDirection;
 

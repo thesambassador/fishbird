@@ -3218,8 +3218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7aa8ca0b51227647aeee93c2d5e3636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 114215457558895738, guid: 49c79ac634659c6458776652ab478846,
-    type: 2}
+  playerPrefab: {fileID: 0}
   cameraController: {fileID: 519420030}
 --- !u!4 &617541485
 Transform:
@@ -6892,6 +6891,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1668926207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668926210}
+  - component: {fileID: 1668926209}
+  - component: {fileID: 1668926208}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1668926208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1668926207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba7335695a64d442ba3c73abef15fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CreateParentTransforms: 1
+  InitialPrefabs:
+  - Prefab: {fileID: 1608419818375386, guid: 504a3a8398250ed4d95a044422a43f0f, type: 2}
+    InitPoolSize: 20
+  - Prefab: {fileID: 1377065585284488, guid: a32e8475f4f77cc4fabf3e0f70fa9494, type: 2}
+    InitPoolSize: 20
+--- !u!114 &1668926209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1668926207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4df41e31a7bb5c4ab1a8cbc9c048383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1668926210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1668926207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1691717134
 GameObject:
   m_ObjectHideFlags: 0

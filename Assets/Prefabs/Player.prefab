@@ -238,7 +238,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  projectilePrefab: {fileID: 114990654661581652, guid: a32e8475f4f77cc4fabf3e0f70fa9494,
+  projectilePrefab: {fileID: 1377065585284488, guid: a32e8475f4f77cc4fabf3e0f70fa9494,
     type: 2}
   projectileOffset: 2
 --- !u!114 &114499129387320568
@@ -283,7 +283,7 @@ MonoBehaviour:
   maxSwimSpeed: 30
   waterDragNoInput: 0.5
   waterDragInput: 0.1
-  projectilePrefab: {fileID: 114407359638214884, guid: 504a3a8398250ed4d95a044422a43f0f,
+  projectilePrefab: {fileID: 1608419818375386, guid: 504a3a8398250ed4d95a044422a43f0f,
     type: 2}
   projectileOffset: 1
   projectileFireRate: 10

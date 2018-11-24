@@ -27,12 +27,12 @@ public class RespawnPlayerAfterDelay : MonoBehaviour {
 			if (requireButtonPress) {
 				if (_player.GetAnyButtonDown()) {
 					GameManager.instance.ResetWorldToLastCheckpoint();
-					Destroy(this.gameObject);
+					ObjectPoolManager.ReturnObject(this.gameObject);
 				}
 			}
 			else {
 				GameManager.instance.ResetWorldToLastCheckpoint();
-				Destroy(this.gameObject);
+				ObjectPoolManager.ReturnObject(this.gameObject);
 			}
 		}
 	}
