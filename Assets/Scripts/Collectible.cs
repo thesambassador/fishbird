@@ -22,4 +22,5 @@ public class Collectible : MonoBehaviour {
 			ObjectPoolManager.ReturnObject(this.gameObject);
 		}
 	}
+
 }
