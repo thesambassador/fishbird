@@ -87,5 +87,14 @@ public class ObjectPoolManager : MonoBehaviour {
         }
     }
 
+	public static void ReturnObject(GameObject activeObject, float delay) {
+		Instance.StartCoroutine(Instance.DelayReturnObject(activeObject, delay));
+	}
+
+	public IEnumerator DelayReturnObject(GameObject activeObject, float delay) {
+		yield return new WaitForSeconds(delay);
+		ReturnObject(activeObject);
+	}
+
 
 }

@@ -38,9 +38,9 @@ public class Water : MonoBehaviour {
     }
 
     void Start() {
-        SpawnWater(spriteRenderer.bounds);
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		spriteRenderer.enabled = false;
+		SpawnWater(spriteRenderer.bounds);
 	}
 
     
@@ -69,9 +69,9 @@ public class Water : MonoBehaviour {
             Vector3 position = new Vector3(xpositions[index],ypositions[index]-0.35f,5);
 
             //Create the splash and tell it to destroy itself.
-            GameObject splish = Instantiate(splash) as GameObject;
+            GameObject splish = ObjectPoolManager.GetObject(splash);
             splish.transform.position = position;
-            Destroy(splish, lifetime+0.3f);
+			ObjectPoolManager.ReturnObject(splish, lifetime + .5f);
         }
     }
 
