@@ -71,7 +71,6 @@ GameObject:
   - component: {fileID: 114062863924688076}
   - component: {fileID: 114514737932595962}
   - component: {fileID: 114666302445451738}
-  - component: {fileID: 114120736227302612}
   m_Layer: 0
   m_Name: AirEnemy
   m_TagString: Untagged
@@ -212,19 +211,6 @@ MonoBehaviour:
   horizontalZoneSize: 5
   startingPosition: {x: 0, y: 0}
   desiredPosition: {x: 0, y: 0}
---- !u!114 &114120736227302612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1575318967876326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3057019314b9ed049a4ccac7e570fdb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkpointLocation: 0
-  prefab: {fileID: 1575318967876326}
 --- !u!114 &114514737932595962
 MonoBehaviour:
   m_ObjectHideFlags: 1

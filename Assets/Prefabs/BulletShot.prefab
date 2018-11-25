@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4602864282737696}
   - component: {fileID: 212975609773194376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 58095663071222432}
   - component: {fileID: 50536995497476918}
   - component: {fileID: 114539932499795188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
+  damageTag: 
 --- !u!212 &212975609773194376
 SpriteRenderer:
   m_ObjectHideFlags: 1

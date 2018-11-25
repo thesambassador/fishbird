@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648940280603034}
   - component: {fileID: 212071671931428098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FishSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4832485853142368}
   - component: {fileID: 212232669408659836}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Aimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4290000138371310}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AimerPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 114286396890747056}
   - component: {fileID: 114627780272137176}
   - component: {fileID: 114664448717105432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
