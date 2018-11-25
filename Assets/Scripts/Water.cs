@@ -34,13 +34,14 @@ public class Water : MonoBehaviour {
     float bottom;
     
     void Awake() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = false;
+        
     }
 
     void Start() {
         SpawnWater(spriteRenderer.bounds);
-    }
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer.enabled = false;
+	}
 
     
     public void Splash(float xpos, float velocity) {

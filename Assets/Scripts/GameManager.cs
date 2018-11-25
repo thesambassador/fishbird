@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using Com.LuisPedroFonseca.ProCamera2D;
+
+public class IntEvent : UnityEvent<int> { }
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public GameObject playerPrefab;
 
 	public ProCamera2D cameraController;
+
+	public IntEvent OnCheckpointEntered;
+	public IntEvent OnLevelReset;
 
 	public int score
 	{
@@ -25,6 +31,12 @@ public class GameManager : MonoBehaviour {
 
 	private void Awake() {
 		instance = this;
+		if (OnCheckpointEntered == null) {
+			OnCheckpointEntered = new IntEvent();
+		}
+		if(OnLevelReset == null) {
+			OnLevelReset = new IntEvent();
+		}
 	}
 
 	void Start() {
@@ -40,6 +52,8 @@ public class GameManager : MonoBehaviour {
 		_scoreSinceLastCheckpoint = 0;
 		_lastCheckpoint = newCheckpoint;
 		_lastCheckpointNumber = newCheckpoint.checkpointNumber;
+
+		OnCheckpointEntered.Invoke(_lastCheckpointNumber);
 	}
 
 	public void AddScore(int scoreAmount) {
@@ -48,7 +62,7 @@ public class GameManager : MonoBehaviour {
 
 	public void RespawnPlayerAtLastCheckpoint() {
 		Vector3 spawnPos = _lastCheckpoint.transform.position;
-
+		
 		PlayerMovement newPlayer = ObjectPoolManager.GetObject(playerPrefab).GetComponent<PlayerMovement>();
 		newPlayer.transform.position = spawnPos;
 
@@ -59,6 +73,7 @@ public class GameManager : MonoBehaviour {
 
 		_scoreSinceLastCheckpoint = 0;
 
+		OnLevelReset.Invoke(_lastCheckpointNumber);
 		//todo respawn stuff that needs to be reset?
 	}
 

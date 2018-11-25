@@ -14,6 +14,11 @@ public class Health : MonoBehaviour {
 	public UnityEvent OnDamaged;
 	public UnityEvent OnKilled;
 
+	[HideInInspector]
+	public float currentHP;
+
+	public bool debugKill = false;
+
 	public bool Invulnerable
 	{
 		get
@@ -31,6 +36,11 @@ public class Health : MonoBehaviour {
 		}
 	}
 
+	void OnEnable() {
+		currentHP = hp;
+		_invulnTimer = 0;
+	}
+
 	// Use this for initialization
 	void Start () {
 		
@@ -41,12 +51,18 @@ public class Health : MonoBehaviour {
 		if(_invulnTimer > 0) {
 			_invulnTimer -= Time.deltaTime;
 		}
+
+		if (debugKill) {
+			if (Input.GetKeyDown(KeyCode.K)) {
+				Damage(50);
+			}
+		}
 	}
 
 	public void Damage(float damageAmount) {
 		if (!Invulnerable) {
-			hp -= damageAmount;
-			if(hp <= 0) {
+			currentHP -= damageAmount;
+			if(currentHP <= 0) {
 				Kill();
 			}
 			_invulnTimer = invulnTimeAfterHit;

@@ -23,6 +23,13 @@ public class WaterEnemyBehavior : MonoBehaviour {
 	private bool _pointAtPlayer = false;
 	private float _strokeCooldownTimer = 0;
 
+	void OnEnable() {
+		state = EnemyState.Idle;
+		rb.velocity = new Vector2();
+		rb.angularVelocity = 0;
+		animator.ResetTrigger("SwimStroke");
+	}
+
 	// Use this for initialization
 	void Start () {
 		
@@ -96,7 +103,7 @@ public class WaterEnemyBehavior : MonoBehaviour {
 		if(collision.gameObject.tag == "Ground") {
 			//print(collision.relativeVelocity.magnitude);
 			if(collision.relativeVelocity.magnitude > killVelocity) {
-				Destroy(this.gameObject);
+				ObjectPoolManager.ReturnObject(this.gameObject);
 			}
 		}
 	}

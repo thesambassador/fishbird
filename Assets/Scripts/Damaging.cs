@@ -22,7 +22,7 @@ public class Damaging : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		Health health = collision.gameObject.GetComponent<Health>();
 		if (health != null) {
-			if (damageTag != null){
+			if (damageTag != ""){
 				if (collision.gameObject.tag == damageTag) {
 					health.Damage(damageAmount);
 				}

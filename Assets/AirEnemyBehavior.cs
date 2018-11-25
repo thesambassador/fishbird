@@ -45,12 +45,18 @@ public class AirEnemyBehavior : MonoBehaviour {
 	public Vector2 desiredPosition;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		_rb = GetComponent<Rigidbody2D>();
 		startingPosition = transform.position;
 		
 	}
-	
+
+	private void OnEnable() {
+		_rb.velocity = new Vector2();
+		_rb.angularVelocity = 0;
+		state = AirEnemyState.Idle;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		state = DetermineState();

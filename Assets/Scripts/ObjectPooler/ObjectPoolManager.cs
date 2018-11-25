@@ -68,7 +68,7 @@ public class ObjectPoolManager : MonoBehaviour {
         }
         else
         {
-            Debug.LogWarning("Object " + prefab.name + " does not have a pool, instantiating instead");
+            //Debug.LogWarning("Object " + prefab.name + " does not have a pool, instantiating instead");
             return GameObject.Instantiate(prefab, position, rotation, parent);
         }
     }
@@ -82,7 +82,7 @@ public class ObjectPoolManager : MonoBehaviour {
         }
         else
         {
-            Debug.LogWarning("Object " + activeObject.name + " has no pool to return to, destroying instead");
+            //Debug.LogWarning("Object " + activeObject.name + " has no pool to return to, destroying instead");
             Destroy(activeObject.gameObject);
         }
     }

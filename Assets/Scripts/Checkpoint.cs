@@ -6,7 +6,7 @@ public class Checkpoint : MonoBehaviour {
 	public int checkpointNumber = 0;
 
 	[TagSelector]
-	public string tag;
+	public string tagCheck;
 
 	private Collider2D _collider;
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class Checkpoint : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		if(collision.gameObject.tag == tag) {
+		if(collision.gameObject.tag == tagCheck) {
 			_collider.enabled = false;
 			GameManager.instance.CheckpointReached(this);
 		}
