@@ -76,7 +76,7 @@ public class PlayerWaterControl : MonoBehaviour {
 				shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
 				shootyshoot.direction = playerMovement.aimDirection;
 
-				shootyshoot.speed += Vector2.Dot(rb.velocity, shootyshoot.direction);
+				shootyshoot.SetSpeed(Vector2.Dot(rb.velocity, shootyshoot.direction));
 				shootyshoot.transform.right = playerMovement.aimDirection;
 
 				_shotCooldown = 1 / projectileFireRate;

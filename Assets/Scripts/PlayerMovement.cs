@@ -99,6 +99,7 @@ public class PlayerMovement : MonoBehaviour {
          }
      }
 
+
 	IEnumerator SlowTime(float time, float newTimescale) {
 		Time.timeScale = newTimescale;
 

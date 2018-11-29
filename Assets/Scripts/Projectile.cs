@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour {
 	public Vector2 direction;
 	public float lifespan;
 
+	public float baseSpeed;
 	public float speed;
 	public AnimationCurve velocityCurve;
 
@@ -40,6 +41,10 @@ public class Projectile : MonoBehaviour {
 			yield return null;
 		}
 		ObjectPoolManager.ReturnObject(this.gameObject);
+	}
+
+	public void SetSpeed(float shooterSpeed) {
+		speed = shooterSpeed + baseSpeed;
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision) {
