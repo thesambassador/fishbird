@@ -10,8 +10,6 @@ public enum PlayerMovementState {
 
 public class PlayerMovement : MonoBehaviour {
 
-	public int playerId;
-	Player player;
 	Rigidbody2D rb;
 	SpriteRenderer spriteRenderer;
 
@@ -22,15 +20,22 @@ public class PlayerMovement : MonoBehaviour {
 	public Transform aimerPivotTransform;
 	public Transform projectileSpawnPoint;
 
+	public Player fishPlayer;
+	public Player birdPlayer;
+
 	public Vector2 aimDirection;
 
-	void Awake() {
-		player = ReInput.players.GetPlayer(playerId);
-		rb = GetComponent<Rigidbody2D>();
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-	}
+	public bool singlePlayer = false;
 
 	void Start() {
+		fishPlayer = ReInput.players.GetPlayer(GameManager.instance.FishPlayerID);
+		birdPlayer = ReInput.players.GetPlayer(GameManager.instance.BirdPlayerID);
+		if(GameManager.instance.FishPlayerID == GameManager.instance.BirdPlayerID) {
+			singlePlayer = true;
+		}
+		
+		rb = GetComponent<Rigidbody2D>();
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		rb.AddCappedForce(initialImpulse, maxSpeed, ForceMode2D.Impulse);
 	}
 

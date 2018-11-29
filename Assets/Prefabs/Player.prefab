@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114286396890747056}
   - component: {fileID: 114627780272137176}
   - component: {fileID: 114664448717105432}
+  - component: {fileID: 114623056898162664}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -101,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683940139785172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 220.4, y: -35.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648940280603034}
@@ -181,13 +182,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6500a75be80674885442100942d03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 0
-  state: 0
+  state: 1
   initialImpulse: {x: 0, y: 0}
   maxSpeed: 30
   aimerPivotTransform: {fileID: 4290000138371310}
   projectileSpawnPoint: {fileID: 4832485853142368}
   aimDirection: {x: 0, y: 0}
+  singlePlayer: 0
 --- !u!114 &114286396890747056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,12 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7a255bba7b02c4c8784333cd0dc97b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
   flapEnabled: 0
   flapImpulse: 4
   maxSpeed: 30
-  liftForce: 4
-  maxAirDrag: 0.3
+  liftForce: 5
+  maxAirDrag: 1
+  pullUpDrag: 0.5
   flapImpulseCurve:
     serializedVersion: 2
     m_Curve:
@@ -252,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bbda82b572a534ab4fe4fd5e571260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
   swimDashImpulse: 10
   maxSpeed: 30
   swimMovementForceCurve:
@@ -287,6 +287,21 @@ MonoBehaviour:
     type: 2}
   projectileOffset: 1
   projectileFireRate: 10
+--- !u!114 &114623056898162664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683940139785172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ed58c784e626f47997a8bc66c91feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flingSpeed: 20
+  flingAcceleration: 100
+  flingableDetectionRadius: 3
+  timeSlow: 0.1
 --- !u!114 &114627780272137176
 MonoBehaviour:
   m_ObjectHideFlags: 1

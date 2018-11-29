@@ -5,13 +5,10 @@ using UnityEngine;
 using Rewired;
 
 public class PlayerWaterControl : MonoBehaviour {
-	Player player;
 	Rigidbody2D rb;
 	SpriteRenderer spriteRenderer;
 
 	PlayerMovement playerMovement;
-
-	public int playerId;
 
 	public float swimDashImpulse;
 	public float maxSpeed;
@@ -30,7 +27,6 @@ public class PlayerWaterControl : MonoBehaviour {
 	private float _shotCooldown = 0;
 
 	void Awake() {
-		player = ReInput.players.GetPlayer(playerId);
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		playerMovement = GetComponent<PlayerMovement>();
@@ -65,12 +61,12 @@ public class PlayerWaterControl : MonoBehaviour {
 	}
 
 	void UpdateFly() {
-		Vector2 movement = player.GetAxis2D("AimHorizontal", "AimVertical");
+		Vector2 movement = playerMovement.fishPlayer.GetAxis2D("AimHorizontal", "AimVertical");
 		if (movement.sqrMagnitude != 0) {
 			playerMovement.aimDirection = movement.normalized;
 		}
 
-		if (player.GetButton("SecondaryAbility")) {
+		if (playerMovement.fishPlayer.GetButton("SecondaryAbility")) {
 			if (_shotCooldown <= 0) {
 				Projectile shootyshoot = ObjectPoolManager.GetObject(projectilePrefab).GetComponent<Projectile>();
 				shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
@@ -87,7 +83,7 @@ public class PlayerWaterControl : MonoBehaviour {
 	}
 
 	void UpdateSwim() {
-		bool moveAbilityDown = player.GetButtonDown("Move Ability");
+		bool moveAbilityDown = playerMovement.fishPlayer.GetButtonDown("Move Ability");
 		if (moveAbilityDown) {
 			rb.AddCappedForce(rb.velocity.normalized * swimDashImpulse, maxSpeed, ForceMode2D.Impulse);
 		}
@@ -98,7 +94,7 @@ public class PlayerWaterControl : MonoBehaviour {
 	}
 
 	void FixedUpdateSwim() {
-		Vector2 movement = player.GetAxis2D("Horizontal", "Vertical");
+		Vector2 movement = playerMovement.fishPlayer.GetAxis2D("Horizontal", "Vertical");
 		if (movement.magnitude > 1) movement.Normalize();
 
 		Vector2 targetSpeed = movement * maxSwimSpeed;

@@ -9,11 +9,8 @@ public class FlingControl : MonoBehaviour {
 	List<Flingable> flingCandidates;
 	Flingable[] allFlingables;
 
-	public int playerId;
-
 	Rigidbody2D rb;
-	Player player;
-	PlayerMovement pm;
+	PlayerMovement playerMovement;
 
 	Flingable target;
 
@@ -29,29 +26,28 @@ public class FlingControl : MonoBehaviour {
 	void Start () {
 		allFlingables = FindObjectsOfType<Flingable>();
 		flingCandidates = new List<Flingable>();
-		player = ReInput.players.GetPlayer(playerId);
-		pm = GetComponent<PlayerMovement>();
+		playerMovement = GetComponent<PlayerMovement>();
 		rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (pm.state == PlayerMovementState.FLYING) {
+		if (playerMovement.state == PlayerMovementState.FLYING) {
 			GetCandidateFlingables();
 			if (flingCandidates.Count > 0) {
 				target = GetBestFlingable();
 				HighlightTarget(target);
 
-				if (!determiningDirection && player.GetButtonDown("Move Ability")) {
+				if (!determiningDirection && playerMovement.fishPlayer.GetButtonDown("Move Ability")) {
 					determiningDirection = true;
 					StartCoroutine(SlowTime(timeSlow));
 				}
 
 				if (determiningDirection) {
-					Vector2 aimVector = player.GetAxis2D("Horizontal", "Vertical");
-					pm.aimDirection = aimVector.normalized;
+					Vector2 aimVector = playerMovement.fishPlayer.GetAxis2D("Horizontal", "Vertical");
+					playerMovement.aimDirection = aimVector.normalized;
 
-					if (player.GetButtonUp("Move Ability")) {
+					if (playerMovement.fishPlayer.GetButtonUp("Move Ability")) {
 						target.Fling(rb, -aimVector.normalized, flingSpeed, flingAcceleration);
 						target = null;
 						determiningDirection = false;

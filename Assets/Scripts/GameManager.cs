@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
 	public IntEvent OnCheckpointEntered;
 	public IntEvent OnLevelReset;
 
+	public int FishPlayerID = 0;
+	public int BirdPlayerID = 0;
+
 	public int score
 	{
 		get
@@ -61,7 +64,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void RespawnPlayerAtLastCheckpoint() {
-		Vector3 spawnPos = _lastCheckpoint.transform.position;
+		Vector3 spawnPos = Vector3.zero;
+		if (_lastCheckpoint != null) {
+			spawnPos = _lastCheckpoint.transform.position;
+		}
 		
 		PlayerMovement newPlayer = ObjectPoolManager.GetObject(playerPrefab).GetComponent<PlayerMovement>();
 		newPlayer.transform.position = spawnPos;

@@ -5,13 +5,11 @@ using UnityEngine;
 using Rewired;
 
 public class PlayerAirControl : MonoBehaviour {
-	Player player;
 	Rigidbody2D rb;
 	SpriteRenderer spriteRenderer;
 
 	PlayerMovement playerMovement;
 
-	public int playerId;
 	public bool flapEnabled;
 	public float flapImpulse;
 
@@ -26,7 +24,6 @@ public class PlayerAirControl : MonoBehaviour {
 	public float projectileOffset = 1.5f;
 
 	void Awake() {
-		player = ReInput.players.GetPlayer(playerId);
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		playerMovement = GetComponent<PlayerMovement>();
@@ -61,10 +58,7 @@ public class PlayerAirControl : MonoBehaviour {
 	}
 
 	void UpdateFly() {
-		bool moveAbilityDown = player.GetButtonDown("Move Ability");
-		if (moveAbilityDown && flapEnabled) {
-			Flap();
-		}
+
 	}
 
 	void Flap() {
@@ -73,12 +67,12 @@ public class PlayerAirControl : MonoBehaviour {
 	}
 
 	void UpdateSwim() {
-		Vector2 movement = player.GetAxis2D("AimHorizontal", "AimVertical");
+		Vector2 movement = playerMovement.birdPlayer.GetAxis2D("AimHorizontal", "AimVertical");
 		if (movement.sqrMagnitude != 0) {
 			playerMovement.aimDirection = movement.normalized;
 		}
 
-		if(player.GetButtonDown("SecondaryAbility")){
+		if(playerMovement.birdPlayer.GetButtonDown("SecondaryAbility")){
 			Projectile shootyshoot = ObjectPoolManager.GetObject(projectilePrefab).GetComponent<Projectile>();
 			shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
 			shootyshoot.direction = playerMovement.aimDirection;
@@ -90,7 +84,7 @@ public class PlayerAirControl : MonoBehaviour {
 	}
 
 	void FixedUpdateFly() {
-		float pitch = player.GetAxis("Pitch");
+		float pitch = playerMovement.birdPlayer.GetAxis("Pitch");
 
 		Vector2 pitchForce = Vector2.Perpendicular(rb.velocity) * pitch * liftForce;
 
