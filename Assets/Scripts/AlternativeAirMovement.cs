@@ -98,7 +98,7 @@ public class AlternativeAirMovement : MonoBehaviour {
 
 		//diving
 		if (moveAbilityHeld) {
-			Vector2 diveDirection = ClampVectorToAngleFromVector(movement.normalized, Vector2.down, 90);
+			Vector2 diveDirection = ClampVectorToAngleFromVector(movement.normalized, Vector2.down, 135);
 			rb.AddForceToAchieveTargetVelocity(diveDirection * rb.velocity.magnitude, diveForce, diveVelocityForceCurve);
 
 			Debug.DrawLine(transform.position, transform.position + (Vector3)diveDirection * 5);

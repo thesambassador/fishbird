@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour {
 	public Vector2 aimDirection;
 
 	public bool singlePlayer = false;
+	public float enterWaterImpulse = 5;
+	public float exitWaterImpulse = 5;
 
 	void Start() {
 		fishPlayer = ReInput.players.GetPlayer(GameManager.instance.FishPlayerID);
@@ -93,6 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
          if (other.tag == "Water") {
              state = PlayerMovementState.SWIMMING;
+			rb.AddForce(rb.velocity.normalized * enterWaterImpulse, ForceMode2D.Impulse);
 			//StartCoroutine(SlowTime(.5f, .1f));
 		}
      }
@@ -100,8 +103,9 @@ public class PlayerMovement : MonoBehaviour {
      void OnTriggerExit2D(Collider2D other) {
          if (other.tag == "Water") {
              state = PlayerMovementState.FLYING;
+			rb.AddForce(rb.velocity.normalized * exitWaterImpulse, ForceMode2D.Impulse);
 			//StartCoroutine(SlowTime(.25f, .1f));
-         }
+		}
      }
 
 
