@@ -29,19 +29,21 @@ public class PlayerMovement : MonoBehaviour {
 	public float enterWaterImpulse = 5;
 	public float exitWaterImpulse = 5;
 
+	public bool moveInputDisabled = false;
+
 	void Start() {
 		fishPlayer = ReInput.players.GetPlayer(GameManager.instance.FishPlayerID);
 		birdPlayer = ReInput.players.GetPlayer(GameManager.instance.BirdPlayerID);
-		if(GameManager.instance.FishPlayerID == GameManager.instance.BirdPlayerID) {
+		if (GameManager.instance.FishPlayerID == GameManager.instance.BirdPlayerID) {
 			singlePlayer = true;
 		}
-		
+
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		rb.AddCappedForce(initialImpulse, maxSpeed, ForceMode2D.Impulse);
 	}
 
-	void Update () {
+	void Update() {
 		switch (state) {
 			case PlayerMovementState.FLYING:
 				UpdateFly();
@@ -53,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
- 		spriteRenderer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		spriteRenderer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		spriteRenderer.flipY = rb.velocity.x < 0;
 
 		aimerPivotTransform.right = aimDirection.normalized;
@@ -93,21 +95,28 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-         if (other.tag == "Water") {
-             state = PlayerMovementState.SWIMMING;
+		if (other.tag == "Water") {
+			state = PlayerMovementState.SWIMMING;
 			rb.AddForce(rb.velocity.normalized * enterWaterImpulse, ForceMode2D.Impulse);
+			StartCoroutine(DisableMovementInput(.1f));
 			//StartCoroutine(SlowTime(.5f, .1f));
 		}
-     }
-     
-     void OnTriggerExit2D(Collider2D other) {
-         if (other.tag == "Water") {
-             state = PlayerMovementState.FLYING;
+	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag == "Water") {
+			state = PlayerMovementState.FLYING;
 			rb.AddForce(rb.velocity.normalized * exitWaterImpulse, ForceMode2D.Impulse);
+			StartCoroutine(DisableMovementInput(.1f));
 			//StartCoroutine(SlowTime(.25f, .1f));
 		}
-     }
+	}
 
+	IEnumerator DisableMovementInput(float time) {
+		moveInputDisabled = true;
+		yield return new WaitForSeconds(time);
+		moveInputDisabled = false;
+	}
 
 	IEnumerator SlowTime(float time, float newTimescale) {
 		Time.timeScale = newTimescale;

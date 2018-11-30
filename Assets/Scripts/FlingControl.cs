@@ -45,7 +45,7 @@ public class FlingControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//if (playerMovement.state == PlayerMovementState.FLYING) {
+		if (playerMovement.state == PlayerMovementState.FLYING) {
 			GetCandidateFlingables();
 			if (flingCandidates.Count > 0) {
 				target = GetBestFlingable();
@@ -60,12 +60,12 @@ public class FlingControl : MonoBehaviour {
 
 				if (determiningDirection) {
 					Vector2 aimVector = playerMovement.fishPlayer.GetAxis2D("AimHorizontal", "AimVertical");
-					if(aimVector.magnitude == 0) {
+					if (aimVector.magnitude == 0) {
 						aimVector = playerMovement.aimDirection;
 					}
 
 					playerMovement.aimDirection = aimVector.normalized;
-					
+
 					transform.position = Vector2.Lerp(transform.position, target.transform.position, .1f);
 
 					if (playerMovement.fishPlayer.GetButtonUp("SecondaryAbility")) {
@@ -74,16 +74,15 @@ public class FlingControl : MonoBehaviour {
 						HighlightTarget(null);
 					}
 				}
-
-			////}
-			//else {
-			//	determiningDirection = false;
-			//	target = null;
-			//	HighlightTarget(null);
-			//}
+			}
+			else {
+				determiningDirection = false;
+				target = null;
+				HighlightTarget(null);
+			}
 		}
 		else {
-
+			HighlightTarget(null);
 			determiningDirection = false;
 			target = null;
 		}
@@ -93,9 +92,11 @@ public class FlingControl : MonoBehaviour {
 
 	IEnumerator TempDisableCollision(Flingable flingable) {
 		Physics2D.IgnoreCollision(flingable.collider, collider2d, true);
+		print("disabled collision between " + this.name + " and " + flingable.name);
 		while (!flingable.CanFling || flingable.focused) {
 			yield return null;
 		}
+		print("re-enabled collision between " + this.name + " and " + flingable.name);
 		Physics2D.IgnoreCollision(flingable.collider, collider2d, false);
 	}
 

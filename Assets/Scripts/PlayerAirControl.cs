@@ -85,6 +85,8 @@ public class PlayerAirControl : MonoBehaviour {
 
 	void FixedUpdateFly() {
 		float pitch = playerMovement.birdPlayer.GetAxis("Pitch");
+		if (playerMovement.moveInputDisabled)
+			pitch = 0;
 
 		Vector2 pitchForce = Vector2.Perpendicular(rb.velocity) * pitch * liftForce;
 

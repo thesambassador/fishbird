@@ -95,6 +95,9 @@ public class PlayerWaterControl : MonoBehaviour {
 
 	void FixedUpdateSwim() {
 		Vector2 movement = playerMovement.fishPlayer.GetAxis2D("Horizontal", "Vertical");
+		if (playerMovement.moveInputDisabled)
+			movement = Vector2.zero;
+
 		if (movement.magnitude > 1) movement.Normalize();
 
 		Vector2 targetSpeed = movement * maxSwimSpeed;

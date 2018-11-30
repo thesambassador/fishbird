@@ -10,6 +10,8 @@ public class FlingForceComponent : MonoBehaviour {
 	public float flingSpeed;
 	public Vector2 flingDirection;
 
+	private float _lifespan;
+
 	// Use this for initialization
 	void Awake () {
 		_rb = GetComponent<Rigidbody2D>();
@@ -17,11 +19,12 @@ public class FlingForceComponent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (_rb.velocity.magnitude >= flingSpeed) {
+		if (_rb.velocity.magnitude >= flingSpeed || _lifespan <= 0) {
 			_rb.velocity = Vector2.ClampMagnitude(_rb.velocity, flingSpeed);
 			EndForce();
 		}
 		else {
+			_lifespan -= Time.deltaTime;
 			_rb.AddForce(flingDirection * flingAcceleration * _rb.mass);
 		}
 	}
@@ -34,6 +37,7 @@ public class FlingForceComponent : MonoBehaviour {
 		flingDirection = dir;
 		flingSpeed = speed;
 		flingAcceleration = acceleration;
+		_lifespan = speed / acceleration + .2f;
 	}
 
 	void EndForce() {

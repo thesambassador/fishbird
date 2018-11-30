@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575318967876326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 227.92036, y: -35.986877, z: 0.0144380005}
+  m_LocalPosition: {x: 205.48691, y: -40.031948, z: 0.0144380005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4660493328665908}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 0}
-  FlingCooldown: 0
+  FlingCooldown: 2
   focused: 0
   glowEffect: {fileID: 114244260781469228}
 --- !u!114 &114244260781469228
