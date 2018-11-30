@@ -25,15 +25,15 @@ public class ObjectPoolManager : MonoBehaviour {
 
     void Awake()
     {
-        //Right now, I've decided to not have the pooler persist across scenes, so if we load a new scene,
-        //We'll make sure that we destroy the old pooler and overwrite it with the new one
-        if (_instance != null)
-        {
-            if(_instance.isActiveAndEnabled)
-                Destroy(_instance.gameObject);
-        }
-        _instance = this;
-        Initialize();
+		//Right now, I've decided to not have the pooler persist across scenes, so if we load a new scene,
+		//We'll make sure that we destroy the old pooler and overwrite it with the new one
+		if (_instance != null) {
+			Destroy(this.gameObject);
+		}
+		else {
+			_instance = this;
+			Initialize();
+		}
     }
 
     void Initialize()

@@ -15,7 +15,8 @@ public class PlayerWaterControl : MonoBehaviour {
 
 	public AnimationCurve swimMovementForceCurve;
 	public float maxSwimForce = 30;
-	public float maxSwimSpeed = 30;
+	public float slowSwimSpeed = 30;
+	public float fastSwimSpeed = 50;
 
 	public float waterDragNoInput = .5f;
 	public float waterDragInput = .1f;
@@ -61,10 +62,7 @@ public class PlayerWaterControl : MonoBehaviour {
 	}
 
 	void UpdateFly() {
-		Vector2 movement = playerMovement.fishPlayer.GetAxis2D("AimHorizontal", "AimVertical");
-		if (movement.sqrMagnitude != 0) {
-			playerMovement.aimDirection = movement.normalized;
-		}
+
 
 		//if (playerMovement.fishPlayer.GetButton("SecondaryAbility")) {
 		//	if (_shotCooldown <= 0) {
@@ -85,7 +83,7 @@ public class PlayerWaterControl : MonoBehaviour {
 	void UpdateSwim() {
 		bool moveAbilityDown = playerMovement.fishPlayer.GetButtonDown("Move Ability");
 		if (moveAbilityDown) {
-			rb.AddCappedForce(rb.velocity.normalized * swimDashImpulse, maxSpeed, ForceMode2D.Impulse);
+			//rb.AddCappedForce(rb.velocity.normalized * swimDashImpulse, maxSpeed, ForceMode2D.Impulse);
 		}
 	}
 
@@ -100,7 +98,11 @@ public class PlayerWaterControl : MonoBehaviour {
 
 		if (movement.magnitude > 1) movement.Normalize();
 
-		Vector2 targetSpeed = movement * maxSwimSpeed;
+		Vector2 targetSpeed = movement * slowSwimSpeed;
+		if(playerMovement.fishPlayer.GetButton("Move Ability")) {
+			targetSpeed = movement * fastSwimSpeed;
+		}
+
 		rb.AddForceToAchieveTargetVelocity(targetSpeed, maxSwimForce, swimMovementForceCurve);
 
 		if (movement.magnitude > 0) {

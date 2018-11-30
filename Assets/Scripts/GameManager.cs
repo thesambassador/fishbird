@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 using Com.LuisPedroFonseca.ProCamera2D;
 
@@ -33,7 +34,14 @@ public class GameManager : MonoBehaviour {
 	private int _scoreAtLastCheckpoint = 0;
 
 	private void Awake() {
-		instance = this;
+		if (instance == null) {
+			DontDestroyOnLoad(this);
+			instance = this;
+		}
+		else {
+			Destroy(this.gameObject);
+		}
+
 		if (OnCheckpointEntered == null) {
 			OnCheckpointEntered = new IntEvent();
 		}
@@ -81,6 +89,10 @@ public class GameManager : MonoBehaviour {
 
 		OnLevelReset.Invoke(_lastCheckpointNumber);
 		//todo respawn stuff that needs to be reset?
+	}
+
+	public void StartGame() {
+		SceneManager.LoadScene(1);
 	}
 
 }

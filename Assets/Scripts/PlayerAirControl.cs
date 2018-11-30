@@ -67,9 +67,12 @@ public class PlayerAirControl : MonoBehaviour {
 	}
 
 	void UpdateSwim() {
-		Vector2 movement = playerMovement.birdPlayer.GetAxis2D("AimHorizontal", "AimVertical");
-		if (movement.sqrMagnitude != 0) {
-			playerMovement.aimDirection = movement.normalized;
+		Vector2 aim = playerMovement.birdPlayer.GetAxis2D("Horizontal", "Vertical");
+		if (playerMovement.singlePlayer) {
+			aim = rb.velocity.normalized;
+		}
+		if (aim.sqrMagnitude != 0) {
+			playerMovement.aimDirection = aim.normalized;
 		}
 
 		if(playerMovement.birdPlayer.GetButtonDown("SecondaryAbility")){

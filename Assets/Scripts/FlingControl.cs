@@ -59,7 +59,7 @@ public class FlingControl : MonoBehaviour {
 				}
 
 				if (determiningDirection) {
-					Vector2 aimVector = playerMovement.fishPlayer.GetAxis2D("AimHorizontal", "AimVertical");
+					Vector2 aimVector = playerMovement.fishPlayer.GetAxis2D("Horizontal", "Vertical");
 					if (aimVector.magnitude == 0) {
 						aimVector = playerMovement.aimDirection;
 					}
@@ -69,7 +69,7 @@ public class FlingControl : MonoBehaviour {
 					transform.position = Vector2.Lerp(transform.position, target.transform.position, .1f);
 
 					if (playerMovement.fishPlayer.GetButtonUp("SecondaryAbility")) {
-						target.Fling(rb, aimVector.normalized, flingSpeed, flingAcceleration);
+						target.Fling(rb, -aimVector.normalized, flingSpeed, flingAcceleration);
 						determiningDirection = false;
 						HighlightTarget(null);
 					}

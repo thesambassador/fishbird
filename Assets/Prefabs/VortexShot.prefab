@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0}
-  lifespan: 3
+  lifespan: 2
   baseSpeed: 10
   speed: 10
   velocityCurve:
@@ -218,7 +218,7 @@ AreaEffector2D:
     m_Bits: 4294967295
   m_UseGlobalAngle: 0
   m_ForceAngle: 0
-  m_ForceMagnitude: 60
+  m_ForceMagnitude: 80
   m_ForceVariation: 0
   m_ForceTarget: 0
   m_Drag: 0
