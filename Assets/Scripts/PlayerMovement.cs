@@ -85,9 +85,11 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void UpdateFly() {
-		if(rb.velocity.magnitude < SlowDeathVelocityThreshold) {
+		_timeSinceTerrainCollision += Time.deltaTime;
+
+		if (rb.velocity.magnitude < SlowDeathVelocityThreshold) {
 			_slowDeathTimer -= Time.deltaTime;
-			if(_slowDeathTimer <= 0) {
+			if(_slowDeathTimer <= 0 && _timeSinceTerrainCollision < 1) {
 				playerHealth.Kill();
 			}
 		}
@@ -164,6 +166,13 @@ public class PlayerMovement : MonoBehaviour {
 		Time.timeScale = 1;
 		Time.fixedDeltaTime = originalFixed;
 
+	}
+
+	private float _timeSinceTerrainCollision = 500;
+	private void OnCollisionStay2D(Collision2D collision) {
+		if(collision.gameObject.tag == "Terrain") {
+			_timeSinceTerrainCollision = 0;
+		}
 	}
 
 }
