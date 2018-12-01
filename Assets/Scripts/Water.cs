@@ -215,12 +215,14 @@ public class Water : MonoBehaviour {
                 {
                     leftDeltas[i] = spread * (ypositions[i] - ypositions[i-1]);
                     velocities[i - 1] += leftDeltas[i];
+					rightDeltas[i] = 0;
                 }
                 if (i < xpositions.Length - 1)
                 {
                     rightDeltas[i] = spread * (ypositions[i] - ypositions[i + 1]);
                     velocities[i + 1] += rightDeltas[i];
-                }
+					leftDeltas[i] = 0;
+				}
             }
 
             //Now we apply a difference in position

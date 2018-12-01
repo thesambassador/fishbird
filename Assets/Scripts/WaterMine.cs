@@ -49,18 +49,19 @@ public class WaterMine : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (active) {
-			Vector2 toPlayer = _player.transform.position - transform.position;
-			float dist = toPlayer.magnitude;
+			if (_player != null) {
+				Vector2 toPlayer = _player.transform.position - transform.position;
+				float dist = toPlayer.magnitude;
 
-			Vector2 targetSpeed = toPlayer.normalized * maxSpeed;
-			if(dist > targetDistFromPlayer && inWater && _player.state == PlayerMovementState.SWIMMING) {
-				rb.AddForceToAchieveTargetVelocity(targetSpeed, maxForce, velocityForceCurve);
-				rb.drag = .5f;
+				Vector2 targetSpeed = toPlayer.normalized * maxSpeed;
+				if (dist > targetDistFromPlayer && inWater && _player.state == PlayerMovementState.SWIMMING) {
+					rb.AddForceToAchieveTargetVelocity(targetSpeed, maxForce, velocityForceCurve);
+					rb.drag = .5f;
+				}
+				else {
+					rb.drag = 5;
+				}
 			}
-			else {
-				rb.drag = 5;
-			}
-
 		}
 	}
 
@@ -89,7 +90,7 @@ public class WaterMine : MonoBehaviour {
 	}
 		
 	private void OnCollisionEnter2D(Collision2D collision) {
-		if(collision.gameObject.tag == "Terrain") {
+		if(collision.gameObject.tag == "Terrain" && collision.contacts[0].normalImpulse > 2) {
 			Explode();
 		}
 	}
