@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Vector2 initialImpulse;
 	public float maxSpeed;
 	public Transform aimerPivotTransform;
+	public SpriteRenderer aimerSprite;
 	public Transform projectileSpawnPoint;
 
 	public Player fishPlayer;
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour {
 	public bool singlePlayer = false;
 	public float enterWaterImpulse = 5;
 	public float exitWaterImpulse = 5;
+
+	public float waterTransitionInputDisableTime = .2f;
 
 	public bool moveInputDisabled = false;
 
@@ -94,22 +97,38 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
+	public void SetAimerVisibility(bool visible) {
+		//aimer always visible underwater
+		if (state == PlayerMovementState.SWIMMING) {
+			aimerSprite.enabled = true;
+		}
+		else {
+			aimerSprite.enabled = visible;
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Water") {
 			state = PlayerMovementState.SWIMMING;
 			rb.AddForce(rb.velocity.normalized * enterWaterImpulse, ForceMode2D.Impulse);
 			StartCoroutine(DisableMovementInput(.1f));
+			SetAimerVisibility(true);
 			//StartCoroutine(SlowTime(.5f, .1f));
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
-		if (other.tag == "Water") {
+		if (other.tag == "Water") { 
 			state = PlayerMovementState.FLYING;
+			SetAimerVisibility(false);
 			rb.AddForce(rb.velocity.normalized * exitWaterImpulse, ForceMode2D.Impulse);
-			StartCoroutine(DisableMovementInput(.1f));
+			TempDisableMovement(waterTransitionInputDisableTime);
 			//StartCoroutine(SlowTime(.25f, .1f));
 		}
+	}
+
+	public void TempDisableMovement(float time) {
+		StartCoroutine(DisableMovementInput(time));
 	}
 
 	IEnumerator DisableMovementInput(float time) {

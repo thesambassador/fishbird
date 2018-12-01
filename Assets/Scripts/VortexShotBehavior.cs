@@ -66,7 +66,7 @@ public class VortexShotBehavior : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		print(collision.gameObject.name);
+		//print(collision.gameObject.name);
 		if (collision.tag == "Terrain" || collision.tag == "Obstacle") {
 			ReleaseVortexShot();
 		}
