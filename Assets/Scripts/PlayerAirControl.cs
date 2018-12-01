@@ -16,6 +16,7 @@ public class PlayerAirControl : MonoBehaviour {
 	public float maxSpeed;
 	public float liftForce;
 	public float maxAirDrag = .3f;
+	public float minAirDrag = .1f;
 	public float pullUpDrag = .5f;
 
 	public AnimationCurve flapImpulseCurve;
@@ -101,7 +102,7 @@ public class PlayerAirControl : MonoBehaviour {
 		//}
 
 		float dot = Mathf.Max(0, Vector2.Dot(rb.velocity.normalized, Vector2.up));
-		float drag = maxAirDrag * dot;
+		float drag = Mathf.Max(maxAirDrag * dot, minAirDrag);
 
 		if(pitchForce.y > 0) {
 			drag += pullUpDrag;

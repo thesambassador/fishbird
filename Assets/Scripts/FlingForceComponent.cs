@@ -10,6 +10,8 @@ public class FlingForceComponent : MonoBehaviour {
 	public float flingSpeed;
 	public Vector2 flingDirection;
 
+	public bool ignoreMass = false;
+
 	private float _lifespan;
 
 	// Use this for initialization
@@ -25,7 +27,12 @@ public class FlingForceComponent : MonoBehaviour {
 		}
 		else {
 			_lifespan -= Time.deltaTime;
-			_rb.AddForce(flingDirection * flingAcceleration * _rb.mass);
+			if (ignoreMass) {
+				_rb.AddForce(flingDirection * flingAcceleration * _rb.mass);
+			}
+			else {
+				_rb.AddForce(flingDirection * flingAcceleration);
+			}
 		}
 	}
 

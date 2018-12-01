@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683940139785172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.3, y: -2.7, z: 0}
+  m_LocalPosition: {x: 232.1, y: -25.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648940280603034}
@@ -228,7 +228,7 @@ MonoBehaviour:
   maxSpeed: 30
   liftForce: 4
   maxAirDrag: 0.5
-  pullUpDrag: 0
+  pullUpDrag: 0.1
   flapImpulseCurve:
     serializedVersion: 2
     m_Curve:

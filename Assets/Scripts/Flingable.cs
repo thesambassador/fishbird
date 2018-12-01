@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Flingable : MonoBehaviour {
 
-	private Rigidbody2D _rb;
+	public bool slottable = false;
+	public SpringJoint2D springJoint;
+	public FlingableSlot flingSlot;
+
+	public Rigidbody2D rb;
 	public Collider2D collider;
 	private Collider2D _playerCollider;
 
@@ -34,7 +38,7 @@ public class Flingable : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_rb = GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
 		collider = GetComponent<Collider2D>();
 	}
 	
@@ -62,6 +66,14 @@ public class Flingable : MonoBehaviour {
 		//Physics2D.IgnoreCollision(collider, _playerCollider, true);
 		_flingCooldown = FlingCooldown;
 		focused = false;
+
+		if(flingSlot != null && slottable) {
+			flingSlot.UnslotFlingable();
+			flingSlot = null;
+		}
+
+		springJoint.enabled = false;
+		
 	}
 
 	public void Highlight(bool highlight) {
