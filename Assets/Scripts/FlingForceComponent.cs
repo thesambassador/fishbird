@@ -10,7 +10,7 @@ public class FlingForceComponent : MonoBehaviour {
 	public float flingSpeed;
 	public Vector2 flingDirection;
 
-	public bool ignoreMass = false;
+	public bool ignoreMass = true;
 
 	private float _lifespan;
 

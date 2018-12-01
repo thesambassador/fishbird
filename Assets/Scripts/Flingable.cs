@@ -46,9 +46,14 @@ public class Flingable : MonoBehaviour {
 	void Update () {
 		if(_flingCooldown > 0) {
 			_flingCooldown -= Time.deltaTime;
-			if(_playerCollider != null && _flingCooldown <= 0) {
-				//Physics2D.IgnoreCollision(collider, _playerCollider, false);
-			}
+			
+		}
+
+		if(flingSlot != null) {
+			rb.drag = 1;
+		}
+		else {
+			rb.drag = .5f;
 		}
 	}
 

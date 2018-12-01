@@ -33,6 +33,20 @@ public class Damaging : MonoBehaviour {
 		}
 	}
 
+	private void OnTriggerEnter2D(Collider2D collision) {
+		Health health = collision.gameObject.GetComponent<Health>();
+		if (health != null) {
+			if (damageTag != "") {
+				if (collision.gameObject.tag == damageTag) {
+					health.Damage(damageAmount);
+				}
+			}
+			else {
+				health.Damage(damageAmount);
+			}
+		}
+	}
+
 	private void OnCollisionExit2D(Collision2D collision) {
 
 	}
