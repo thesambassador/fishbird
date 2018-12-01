@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVortexShot : MonoBehaviour {
+	public 
 
 	Rigidbody2D rb;
 	PlayerMovement playerMovement;
 
 	public GameObject vortexShotPrefab;
 	public float projectileOffset;
+
+	
 
 	public float vortexShotCooldown = 3;
 	public float vortexLifetimeAfterRelease = 3;
@@ -62,7 +65,7 @@ public class PlayerVortexShot : MonoBehaviour {
 		if (playerMovement.singlePlayer || aim.magnitude == 0) {
 			aim = rb.velocity.normalized;
 		}
-		if (aim.sqrMagnitude != 0) {
+		if (aim.sqrMagnitude != 0 && !playerMovement.flingControl.determiningDirection) {
 			playerMovement.aimDirection = aim.normalized;
 		}
 

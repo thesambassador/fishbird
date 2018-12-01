@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Transform aimerPivotTransform;
 	public SpriteRenderer aimerSprite;
 	public Transform projectileSpawnPoint;
+	public FlingControl flingControl;
 
 	public Player fishPlayer;
 	public Player birdPlayer;

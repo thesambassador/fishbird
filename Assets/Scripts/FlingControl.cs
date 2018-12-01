@@ -31,7 +31,7 @@ public class FlingControl : MonoBehaviour {
 
 	public float timeSlow = .25f;
 
-	bool determiningDirection = false;
+	public bool determiningDirection = false;
 
 	Flingable currentHighlight;
 
