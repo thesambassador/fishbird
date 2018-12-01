@@ -70,10 +70,9 @@ public class Flingable : MonoBehaviour {
 		if(flingSlot != null && slottable) {
 			flingSlot.UnslotFlingable();
 			flingSlot = null;
+			springJoint.enabled = false;
 		}
 
-		springJoint.enabled = false;
-		
 	}
 
 	public void Highlight(bool highlight) {

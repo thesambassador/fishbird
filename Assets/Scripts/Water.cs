@@ -10,14 +10,18 @@ public class Water : MonoBehaviour {
     float[] ypositions;
     float[] velocities;
     float[] accelerations;
+	float[] leftDeltas;
+	float[] rightDeltas;
 
-    //Our meshes and colliders
-    GameObject[] meshobjects;
+	//Our meshes and colliders
+	GameObject[] meshobjects;
     GameObject[] colliders;
     Mesh[] meshes;
 
-    //Our particle system
-    public GameObject splash;
+	Vector3[][] meshVertices;
+
+	//Our particle system
+	public GameObject splash;
 
     //The GameObject we're using for a mesh
     public GameObject watermesh;
@@ -60,21 +64,25 @@ public class Water : MonoBehaviour {
             //Set the lifetime of the particle system.
             float lifetime = 0.93f + Mathf.Abs(velocity)*0.07f;
 
-            //Set the splash to be between two values in Shuriken by setting it twice.
-            ParticleSystem ps = splash.GetComponent<ParticleSystem>();
-            ParticleSystem.MainModule main = ps.main;
-            main.startSpeed = new ParticleSystem.MinMaxCurve(
-                10 + 5 * Mathf.Pow(Mathf.Abs(velocity),0.5f),
-                15 + 5 * Mathf.Pow(Mathf.Abs(velocity), 0.5f)
-            );
-            main.startLifetime = lifetime;
-
-            //Set the correct position of the particle system.
-            Vector3 position = new Vector3(xpositions[index],ypositions[index]-0.35f,5);
+			
 
             //Create the splash and tell it to destroy itself.
             GameObject splish = ObjectPoolManager.GetObject(splash);
-            splish.transform.position = position;
+
+			//this should be done AFTER instantiating, otherwise you're editing the prefab!
+			//Set the splash to be between two values in Shuriken by setting it twice.
+			ParticleSystem ps = splish.GetComponent<ParticleSystem>();
+			ParticleSystem.MainModule main = ps.main;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(
+				10 + 5 * Mathf.Pow(Mathf.Abs(velocity), 0.5f),
+				15 + 5 * Mathf.Pow(Mathf.Abs(velocity), 0.5f)
+			);
+			main.startLifetime = lifetime;
+
+			//Set the correct position of the particle system.
+			Vector3 position = new Vector3(xpositions[index], ypositions[index] - 0.35f, 5);
+
+			splish.transform.position = position;
 			ObjectPoolManager.ReturnObject(splish, lifetime + .5f);
         }
     }
@@ -95,14 +103,19 @@ public class Water : MonoBehaviour {
         ypositions = new float[nodecount];
         velocities = new float[nodecount];
         accelerations = new float[nodecount];
-        
-        //Declare our mesh arrays
-        meshobjects = new GameObject[edgecount];
+
+		leftDeltas = new float[nodecount];
+		rightDeltas = new float[nodecount];
+
+		//Declare our mesh arrays
+		meshobjects = new GameObject[edgecount];
         meshes = new Mesh[edgecount];
         colliders = new GameObject[edgecount];
 
-        //For each node, set the line renderer and our physics arrays
-        for (int i = 0; i < nodecount; i++)
+		meshVertices = new Vector3[edgecount][];
+
+		//For each node, set the line renderer and our physics arrays
+		for (int i = 0; i < nodecount; i++)
         {
             ypositions[i] = top;
             xpositions[i] = left + width * i / edgecount;
@@ -116,12 +129,12 @@ public class Water : MonoBehaviour {
             //Make the mesh
             meshes[i] = new Mesh();
 
-            //Create the corners of the mesh
-            Vector3[] Vertices = new Vector3[4];
-            Vertices[0] = new Vector3(xpositions[i], ypositions[i], z);
-            Vertices[1] = new Vector3(xpositions[i + 1], ypositions[i + 1], z);
-            Vertices[2] = new Vector3(xpositions[i], bottom, z);
-            Vertices[3] = new Vector3(xpositions[i+1], bottom, z);
+			//Create the corners of the mesh
+			meshVertices[i] = new Vector3[4];
+			meshVertices[i][0] = new Vector3(xpositions[i], ypositions[i], z);
+			meshVertices[i][1] = new Vector3(xpositions[i + 1], ypositions[i + 1], z);
+			meshVertices[i][2] = new Vector3(xpositions[i], bottom, z);
+			meshVertices[i][3] = new Vector3(xpositions[i+1], bottom, z);
 
             //Set the UVs of the texture
             Vector2[] UVs = new Vector2[4];
@@ -134,7 +147,7 @@ public class Water : MonoBehaviour {
             int[] tris = new int[6] { 0, 1, 3, 3, 2, 0};
 
             //Add all this data to the mesh.
-            meshes[i].vertices = Vertices;
+            meshes[i].vertices = meshVertices[i];
             meshes[i].uv = UVs;
             meshes[i].triangles = tris;
 
@@ -169,17 +182,17 @@ public class Water : MonoBehaviour {
         for (int i = 0; i < meshes.Length; i++)
         {
 
-            Vector3[] Vertices = new Vector3[4];
-            Vertices[0] = new Vector3(xpositions[i], ypositions[i], z);
-            Vertices[1] = new Vector3(xpositions[i+1], ypositions[i+1], z);
-            Vertices[2] = new Vector3(xpositions[i], bottom, z);
-            Vertices[3] = new Vector3(xpositions[i+1], bottom, z);
+			meshVertices[i][0] = new Vector3(xpositions[i], ypositions[i], z);
+			meshVertices[i][1] = new Vector3(xpositions[i+1], ypositions[i+1], z);
+			meshVertices[i][2] = new Vector3(xpositions[i], bottom, z);
+			meshVertices[i][3] = new Vector3(xpositions[i+1], bottom, z);
 
-            meshes[i].vertices = Vertices;
+            meshes[i].vertices = meshVertices[i];
         }
     }
 
-    //Called regularly by Unity
+
+
     void FixedUpdate() {
         //Here we use the Euler method to handle all the physics of our springs:
         for (int i = 0; i < xpositions.Length ; i++)
@@ -191,8 +204,6 @@ public class Water : MonoBehaviour {
         }
 
         //Now we store the difference in heights:
-        float[] leftDeltas = new float[xpositions.Length];
-        float[] rightDeltas = new float[xpositions.Length];
 
         //We make 8 small passes for fluidity:
         for (int j = 0; j < 8; j++)

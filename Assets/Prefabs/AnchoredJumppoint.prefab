@@ -108,6 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bafb6824be9cb4180c958720eddb04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slottable: 0
+  springJoint: {fileID: 231371812468206076}
+  flingSlot: {fileID: 0}
+  rb: {fileID: 50410779232228494}
   collider: {fileID: 0}
   FlingCooldown: 1
   focused: 0

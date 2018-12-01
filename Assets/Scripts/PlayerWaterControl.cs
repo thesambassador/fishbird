@@ -14,10 +14,12 @@ public class PlayerWaterControl : MonoBehaviour {
 	public float maxSpeed;
 
 	public AnimationCurve swimMovementForceCurve;
-	public float maxSwimForce = 30;
+	public float maxSwimForce = 50;
+	public float vortexMaxSwimForce = 70;
 	public float slowSwimSpeed = 30;
 	public float fastSwimSpeed = 50;
 	private float _swimSpeedToUse = 30;
+	private float _swimForceToUse = 30;
 	public float vortexSpeedBoostTime = 1;
 
 	private float _vortexSpeedTimer = -1;
@@ -88,10 +90,12 @@ public class PlayerWaterControl : MonoBehaviour {
 	void UpdateSwim() {
 		if(_vortexSpeedTimer < 0) {
 			_swimSpeedToUse = slowSwimSpeed;
+			_swimForceToUse = maxSwimForce;
 		}
 		else {
 			_vortexSpeedTimer -= Time.deltaTime;
 			_swimSpeedToUse = fastSwimSpeed;
+			_swimForceToUse = vortexMaxSwimForce;
 		}
 
 		bool moveAbilityDown = playerMovement.fishPlayer.GetButtonDown("Move Ability");
@@ -116,7 +120,7 @@ public class PlayerWaterControl : MonoBehaviour {
 			targetSpeed = movement * fastSwimSpeed;
 		}
 
-		rb.AddForceToAchieveTargetVelocity(targetSpeed, maxSwimForce, swimMovementForceCurve);
+		rb.AddForceToAchieveTargetVelocity(targetSpeed, _swimForceToUse, swimMovementForceCurve);
 
 		if (movement.magnitude > 0) {
 			rb.drag = waterDragInput;

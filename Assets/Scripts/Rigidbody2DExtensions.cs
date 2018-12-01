@@ -22,7 +22,7 @@ public static class Rigidbody2DExtensions {
 			// if curTargetDiff.magnitude is 0, that means that we're moving at the target speed already
 			forceToUse = velocityForceCurve.Evaluate(curTargetDiff.magnitude / targetSpeed.magnitude) * maxForce;
 		}
-		//Debug.Log(forceToUse);
+		//Debug.Log(forceToUse + ", maxforce: " + maxForce + ", ratio: " + curTargetDiff.magnitude / targetSpeed.magnitude);
 		rigidbody2D.AddForce(forceToUse * curTargetDiff.normalized);
 	}
 

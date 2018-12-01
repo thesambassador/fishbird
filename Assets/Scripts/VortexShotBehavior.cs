@@ -38,7 +38,7 @@ public class VortexShotBehavior : MonoBehaviour {
 		if (released) {
 			_curLifespan -= Time.deltaTime;
 			_curSpeed = _fullSpeed * releasedVelocityCurve.Evaluate(_curLifespan / postReleaseLifespan);
-			print(_curSpeed + ", " + _curLifespan);
+			//print(_curSpeed + ", " + _curLifespan);
 			if(_curLifespan < 0) {
 				ObjectPoolManager.ReturnObject(this.gameObject);
 			}
