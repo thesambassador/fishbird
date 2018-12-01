@@ -16,7 +16,8 @@ public class Collectible : MonoBehaviour {
 			GameManager.instance.AddScore(points);
 
 			if(collectPointsEffect != null) {
-				ObjectPoolManager.GetObject(collectPointsEffect, transform.position, transform.rotation);
+				GameObject effect = ObjectPoolManager.GetObject(collectPointsEffect, transform.position, transform.rotation);
+				ObjectPoolManager.ReturnObject(effect, 1);
 			}
 
 			ObjectPoolManager.ReturnObject(this.gameObject);
