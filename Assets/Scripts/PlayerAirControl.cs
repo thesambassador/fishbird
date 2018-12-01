@@ -67,23 +67,23 @@ public class PlayerAirControl : MonoBehaviour {
 	}
 
 	void UpdateSwim() {
-		Vector2 aim = playerMovement.birdPlayer.GetAxis2D("Horizontal", "Vertical");
-		if (playerMovement.singlePlayer) {
-			aim = rb.velocity.normalized;
-		}
-		if (aim.sqrMagnitude != 0) {
-			playerMovement.aimDirection = aim.normalized;
-		}
+		//Vector2 aim = playerMovement.birdPlayer.GetAxis2D("Horizontal", "Vertical");
+		//if (playerMovement.singlePlayer) {
+		//	aim = rb.velocity.normalized;
+		//}
+		//if (aim.sqrMagnitude != 0) {
+		//	playerMovement.aimDirection = aim.normalized;
+		//}
 
-		if(playerMovement.birdPlayer.GetButtonDown("SecondaryAbility")){
-			Projectile shootyshoot = ObjectPoolManager.GetObject(projectilePrefab).GetComponent<Projectile>();
-			shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
-			shootyshoot.direction = playerMovement.aimDirection;
+		//if(playerMovement.birdPlayer.GetButtonDown("SecondaryAbility")){
+		//	Projectile shootyshoot = ObjectPoolManager.GetObject(projectilePrefab).GetComponent<Projectile>();
+		//	shootyshoot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
+		//	shootyshoot.direction = playerMovement.aimDirection;
 
-			shootyshoot.SetSpeed(Vector2.Dot(rb.velocity, shootyshoot.direction));
+		//	shootyshoot.SetSpeed(Vector2.Dot(rb.velocity, shootyshoot.direction));
 
-			shootyshoot.transform.right = playerMovement.aimDirection;
-		}
+		//	shootyshoot.transform.right = playerMovement.aimDirection;
+		//}
 	}
 
 	void FixedUpdateFly() {

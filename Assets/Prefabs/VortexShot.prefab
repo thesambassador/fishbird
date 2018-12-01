@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4124179763671728}
   - component: {fileID: 212810028360598688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,11 +35,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4809354590488824}
-  - component: {fileID: 114990654661581652}
   - component: {fileID: 58527673564899126}
   - component: {fileID: 50959102188678080}
   - component: {fileID: 249399240325572782}
-  m_Layer: 0
+  - component: {fileID: 114731090981728948}
+  m_Layer: 8
   m_Name: VortexShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4118357606616128}
   - component: {fileID: 249906133145490838}
   - component: {fileID: 58108486406401800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EffectorForObstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.4
---- !u!114 &114990654661581652
+--- !u!114 &114731090981728948
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,18 +162,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1377065585284488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b6f113ffc636d44c80c79e8028c22ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 07f1a8bd99982a44aa95b50b83202b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0}
-  lifespan: 2
-  baseSpeed: 10
-  speed: 10
-  velocityCurve:
+  rb: {fileID: 50959102188678080}
+  direction: {x: 0, y: 0}
+  projectileSpeed: 10
+  postReleaseLifespan: 3
+  minDistBeforeRelease: 0
+  maxDist: 7
+  shouldRelease: 0
+  released: 0
+  releasedVelocityCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.06917938
+      time: 0.9
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 1
       inSlope: 2
       outSlope: 2
@@ -181,29 +194,9 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.1
-      value: 0.1
-      inSlope: -3.6698263
-      outSlope: -3.6698263
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.52729344
-    - serializedVersion: 3
-      time: 0.2001254
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rb: {fileID: 50959102188678080}
-  destroyOnCollision: 0
 --- !u!212 &212810028360598688
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114627780272137176}
   - component: {fileID: 114664448717105432}
   - component: {fileID: 114623056898162664}
+  - component: {fileID: 114162358870463412}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -102,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683940139785172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.85, y: 0, z: 0}
+  m_LocalPosition: {x: 164.21, y: -35.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648940280603034}
@@ -171,6 +172,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.32
+--- !u!114 &114162358870463412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683940139785172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ae843f06e255d4184213ccbc3ca9d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vortexShotPrefab: {fileID: 1377065585284488, guid: a32e8475f4f77cc4fabf3e0f70fa9494,
+    type: 2}
+  projectileOffset: 2
+  vortexShotCooldown: 3
+  vortexLifetimeAfterRelease: 2
+  vortexMinDistBeforeRelease: 0
+  vortexMaxDist: 8
+  currentVortexShot: {fileID: 0}
 --- !u!114 &114215457558895738
 MonoBehaviour:
   m_ObjectHideFlags: 1

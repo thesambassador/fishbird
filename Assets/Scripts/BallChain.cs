@@ -38,7 +38,7 @@ public class BallChain : MonoBehaviour {
 		for (int i = 0; i < numChains; i++) {
 			chains[i] = Instantiate(chainPrefab);
 			chains[i].transform.parent = chainStart;
-			chains[i].transform.position = chainStart.position - (chainStart.up * i);
+			chains[i].transform.position = chainStart.position - (chainStart.up * i * chainLength);
 		}
 
 		for (int i = 0; i < numChains - 1; i++) {
