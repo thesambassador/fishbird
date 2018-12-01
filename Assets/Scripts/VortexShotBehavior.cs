@@ -71,4 +71,11 @@ public class VortexShotBehavior : MonoBehaviour {
 			ReleaseVortexShot();
 		}
 	}
+
+	private void OnTriggerExit2D(Collider2D collision) {
+		if(collision.tag == "Water") {
+			ReleaseVortexShot();
+			_curLifespan = postReleaseLifespan * .5f;
+		}
+	}
 }

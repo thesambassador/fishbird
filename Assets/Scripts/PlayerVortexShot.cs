@@ -79,6 +79,7 @@ public class PlayerVortexShot : MonoBehaviour {
 			currentVortexShot.transform.position = transform.position + (Vector3)playerMovement.aimDirection * projectileOffset;
 
 			currentVortexShot.Shoot(playerMovement.aimDirection, Vector2.Dot(rb.velocity, playerMovement.aimDirection), vortexMinDistBeforeRelease);
+			currentVortexShot.maxDist = vortexMaxDist;
 
 			currentVortexShot.transform.right = playerMovement.aimDirection;
 			_shotCooldown = vortexShotCooldown;

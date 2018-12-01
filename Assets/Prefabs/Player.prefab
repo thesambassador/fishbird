@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683940139785172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 164.21, y: -35.8, z: 0}
+  m_LocalPosition: {x: -6.3, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648940280603034}
@@ -186,10 +186,10 @@ MonoBehaviour:
   vortexShotPrefab: {fileID: 1377065585284488, guid: a32e8475f4f77cc4fabf3e0f70fa9494,
     type: 2}
   projectileOffset: 2
-  vortexShotCooldown: 3
+  vortexShotCooldown: 2
   vortexLifetimeAfterRelease: 2
   vortexMinDistBeforeRelease: 0
-  vortexMaxDist: 8
+  vortexMaxDist: 10
   currentVortexShot: {fileID: 0}
 --- !u!114 &114215457558895738
 MonoBehaviour:
@@ -304,7 +304,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxSwimForce: 50
   slowSwimSpeed: 20
-  fastSwimSpeed: 100
+  fastSwimSpeed: 30
+  vortexSpeedBoostTime: 1
   waterDragNoInput: 0.1
   waterDragInput: 0.1
   projectilePrefab: {fileID: 1608419818375386, guid: 504a3a8398250ed4d95a044422a43f0f,
@@ -322,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ed58c784e626f47997a8bc66c91feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flingSpeed: 15
+  flingSpeed: 20
   flingAcceleration: 100
   flingableDetectionRadius: 3
   timeSlow: 0.1

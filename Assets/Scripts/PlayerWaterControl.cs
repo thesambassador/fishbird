@@ -17,6 +17,10 @@ public class PlayerWaterControl : MonoBehaviour {
 	public float maxSwimForce = 30;
 	public float slowSwimSpeed = 30;
 	public float fastSwimSpeed = 50;
+	private float _swimSpeedToUse = 30;
+	public float vortexSpeedBoostTime = 1;
+
+	private float _vortexSpeedTimer = -1;
 
 	public float waterDragNoInput = .5f;
 	public float waterDragInput = .1f;
@@ -31,6 +35,7 @@ public class PlayerWaterControl : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		playerMovement = GetComponent<PlayerMovement>();
+		_swimSpeedToUse = slowSwimSpeed;
 	}
 
 	void Start() {
@@ -81,6 +86,14 @@ public class PlayerWaterControl : MonoBehaviour {
 	}
 
 	void UpdateSwim() {
+		if(_vortexSpeedTimer < 0) {
+			_swimSpeedToUse = slowSwimSpeed;
+		}
+		else {
+			_vortexSpeedTimer -= Time.deltaTime;
+			_swimSpeedToUse = fastSwimSpeed;
+		}
+
 		bool moveAbilityDown = playerMovement.fishPlayer.GetButtonDown("Move Ability");
 		if (moveAbilityDown) {
 			//rb.AddCappedForce(rb.velocity.normalized * swimDashImpulse, maxSpeed, ForceMode2D.Impulse);
@@ -98,7 +111,7 @@ public class PlayerWaterControl : MonoBehaviour {
 
 		if (movement.magnitude > 1) movement.Normalize();
 
-		Vector2 targetSpeed = movement * slowSwimSpeed;
+		Vector2 targetSpeed = movement * _swimSpeedToUse;
 		if(playerMovement.fishPlayer.GetButton("Move Ability")) {
 			targetSpeed = movement * fastSwimSpeed;
 		}
@@ -110,6 +123,12 @@ public class PlayerWaterControl : MonoBehaviour {
 		}
 		else {
 			rb.drag = waterDragNoInput;
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if(collision.tag == "VortexShot") {
+			_vortexSpeedTimer = vortexSpeedBoostTime;
 		}
 	}
 }

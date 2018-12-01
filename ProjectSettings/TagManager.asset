@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - Terrain
   - Obstacle
+  - VortexShot
   layers:
   - Default
   - TransparentFX
