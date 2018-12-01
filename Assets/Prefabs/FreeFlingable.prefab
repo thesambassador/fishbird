@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114000154089563700}
   - component: {fileID: 114407520767796968}
   - component: {fileID: 231264066146607764}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FreeFlingable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

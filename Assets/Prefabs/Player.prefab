@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683940139785172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 354.3, y: -29.5, z: 0}
+  m_LocalPosition: {x: 224.7, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648940280603034}
@@ -131,7 +131,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1453763905845776}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4290000138371310}
@@ -186,7 +186,7 @@ MonoBehaviour:
   vortexShotPrefab: {fileID: 1377065585284488, guid: a32e8475f4f77cc4fabf3e0f70fa9494,
     type: 2}
   projectileOffset: 2
-  vortexShotCooldown: 2
+  vortexShotCooldown: 1.5
   vortexLifetimeAfterRelease: 2
   vortexMinDistBeforeRelease: 0
   vortexMaxDist: 10
@@ -206,11 +206,13 @@ MonoBehaviour:
   initialImpulse: {x: 0, y: 0}
   maxSpeed: 30
   aimerPivotTransform: {fileID: 4290000138371310}
+  aimerSprite: {fileID: 212232669408659836}
   projectileSpawnPoint: {fileID: 4832485853142368}
   aimDirection: {x: 0, y: 0}
   singlePlayer: 0
   enterWaterImpulse: 2
   exitWaterImpulse: 2
+  waterTransitionInputDisableTime: 0.2
   moveInputDisabled: 0
 --- !u!114 &114286396890747056
 MonoBehaviour:
