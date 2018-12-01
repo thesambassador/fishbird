@@ -59,7 +59,7 @@ public class PlayerVortexShot : MonoBehaviour {
 
 	void UpdateSwim() {
 		Vector2 aim = playerMovement.birdPlayer.GetAxis2D("Horizontal", "Vertical");
-		if (playerMovement.singlePlayer) {
+		if (playerMovement.singlePlayer || aim.magnitude == 0) {
 			aim = rb.velocity.normalized;
 		}
 		if (aim.sqrMagnitude != 0) {

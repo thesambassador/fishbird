@@ -18,7 +18,7 @@ public class VortexShotBehavior : MonoBehaviour {
 
 	private float _fullSpeed;
 	private float _curSpeed;
-	private float _curLifespan;
+	private float _curLifespan = 3;
 	private Vector2 _startPos;
 
 	// Update is called once per frame

@@ -214,6 +214,9 @@ MonoBehaviour:
   exitWaterImpulse: 2
   waterTransitionInputDisableTime: 0.2
   moveInputDisabled: 0
+  SlowDeathTime: 3
+  SlowDeathVelocityThreshold: 3
+  playerHealth: {fileID: 114627780272137176}
 --- !u!114 &114286396890747056
 MonoBehaviour:
   m_ObjectHideFlags: 1

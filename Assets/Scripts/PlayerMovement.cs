@@ -34,6 +34,12 @@ public class PlayerMovement : MonoBehaviour {
 
 	public bool moveInputDisabled = false;
 
+	private float _slowDeathTimer = 3;
+	public float SlowDeathTime = 3;
+	public float SlowDeathVelocityThreshold = 3;
+
+	public Health playerHealth;
+
 	void Start() {
 		fishPlayer = ReInput.players.GetPlayer(GameManager.instance.FishPlayerID);
 		birdPlayer = ReInput.players.GetPlayer(GameManager.instance.BirdPlayerID);
@@ -44,6 +50,8 @@ public class PlayerMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		rb.AddCappedForce(initialImpulse, maxSpeed, ForceMode2D.Impulse);
+
+		_slowDeathTimer = SlowDeathTime;
 	}
 
 	void Update() {
@@ -77,7 +85,15 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void UpdateFly() {
-
+		if(rb.velocity.magnitude < SlowDeathVelocityThreshold) {
+			_slowDeathTimer -= Time.deltaTime;
+			if(_slowDeathTimer <= 0) {
+				playerHealth.Kill();
+			}
+		}
+		else {
+			_slowDeathTimer = SlowDeathTime;
+		}
 	}
 
 	void UpdateSwim() {
